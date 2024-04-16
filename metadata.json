@@ -1,0 +1,8 @@
+{
+  "name": "Scratchpad",
+  "description": "Show and hide floating apps using keyboard shortcuts",
+  "uuid": "scratchpad@wastedintelligence.com",
+  "shell-version": [
+    "45"
+  ]
+}
