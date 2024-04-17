@@ -4,5 +4,6 @@
   "uuid": "scratchpad@wastedintelligence.com",
   "shell-version": [
     "45"
-  ]
+  ],
+  "settings-schema": "org.gnome.shell.extensions.scratchpad"
 }

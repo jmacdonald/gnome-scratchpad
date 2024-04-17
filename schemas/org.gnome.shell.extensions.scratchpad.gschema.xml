@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.scratchpad" path="/org/gnome/shell/extensions/scratchpad/">
+    <key name="window-width" type="s">
+      <default>"1200"</default>
+    </key>
+
+    <key name="window-height" type="s">
+      <default>"800"</default>
+    </key>
+  </schema>
+</schemalist>
