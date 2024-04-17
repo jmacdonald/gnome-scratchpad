@@ -8,5 +8,9 @@
     <key name="window-height" type="s">
       <default>"800"</default>
     </key>
+
+    <key name="apps" type="a(ss)">
+      <default>[('gnome-console','Ctrl-f')]</default>
+    </key>
   </schema>
 </schemalist>

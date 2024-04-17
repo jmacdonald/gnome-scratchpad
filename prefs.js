@@ -14,6 +14,23 @@ export default class ScratchpadPreferences extends ExtensionPreferences {
         window.add(page);
 
         page.add(this._appearanceGroup());
+        page.add(this._appsGroup());
+    }
+
+    _appsGroup() {
+        const group = new Adw.PreferencesGroup({
+            title: _('Scratchpad apps'),
+            description: _('Configure apps and their key bindings'),
+        });
+
+        const settings = this.getSettings();
+        const apps = settings.get_value('apps').unpack();
+        for (const app of apps) {
+            const [name, binding] = app.recursiveUnpack();
+            group.add(new Adw.ActionRow({ title: _(name) }));
+        }
+
+        return group;
     }
 
     _appearanceGroup() {
