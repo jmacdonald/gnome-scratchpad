@@ -14,7 +14,7 @@ export default class ScratchpadExtension extends Extension {
   applyBindings() {
     for (const binding of this.config.bindings) {
       this.keyBinder.listenFor(binding.keybind, () => {
-        this.toggleWindow(binding.app);
+        this.toggleWindow(binding);
       });
     }
     this.keyBinder.listenFor(this.config.hide_keybind, () => {
@@ -27,8 +27,8 @@ export default class ScratchpadExtension extends Extension {
     this.keyBinder.clearBindings();
   }
 
-  toggleWindow(name) {
-    let win = Window.find(name);
+  toggleWindow(binding) {
+    let win = Window.find(binding);
 
     if (win === null) { return; }
 
@@ -43,7 +43,7 @@ export default class ScratchpadExtension extends Extension {
 
   hideWindows() {
     for (const binding of this.config.bindings) {
-      Window.find(binding.app)?.hide();
+      Window.find(binding)?.hide();
     }
   }
 }

@@ -3,18 +3,21 @@ import Shell from 'gi://Shell';
 export default class Window {
   static appSystem = Shell.AppSystem.get_default();
 
-  static find(name) {
+  static find({title, wmclass}) {
     let windows = [];
 
     // Find the Gnome window instance
     Window.appSystem.get_running().map(app => windows.push(...app.get_windows()));
     const win = windows.find(win => {
-      return win.get_title() === name || win.get_wm_class_instance() === name
+      return (
+        (wmclass ? win.get_wm_class_instance().match(new RegExp(wmclass)) : false) ||
+        (title ? win.get_title().match(new RegExp(title)) : false)
+      )
     });
 
     // Bail out when it doesn't exist
     if (win === undefined) {
-      log(`Couldn't locate "${name}" window`);
+      log(`Couldn't locate window with wmclass /${wmclass}/ or title /${title}/`);
       log(`Found these other windows:`);
       Window.logWindows();
 
