@@ -42,15 +42,7 @@ export default class Window {
     this.instance = gnome_window
   }
 
-  resize(width, height) {
-    const { x: x, y: y } = this.instance.get_frame_rect();
-    this.instance.move_resize_frame(true, x, y, width, height);
-  }
-
-  center() {
-    // Get the dimensions of the window.
-    const { width: windowWidth, height: windowHeight } = this.instance.get_frame_rect();
-
+  arrange(windowWidth, windowHeight) {
     // Get the dimensions of the primary display and its position
     // relative to the workspace (which includes all monitors).
     const workspace = global.workspace_manager.get_active_workspace();
@@ -71,7 +63,7 @@ export default class Window {
     const y = monitorHeight / 2 - windowHeight / 2 + monitorY;
 
     // Center the window, specifying this as a user-driven operation.
-    this.instance.move_frame(true, x, y);
+    this.instance.move_resize_frame(true, x, y, windowWidth, windowHeight);
   }
 
   show() {

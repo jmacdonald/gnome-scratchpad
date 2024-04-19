@@ -35,8 +35,7 @@ export default class ScratchpadExtension extends Extension {
     if (win.focused()) {
       win.hide();
     } else {
-      win.resize(this.config.window_width, this.config.window_height);
-      win.center();
+      win.arrange(this.config.window_width, this.config.window_height);
       win.show();
     }
   }
