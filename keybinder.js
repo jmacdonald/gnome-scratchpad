@@ -10,7 +10,7 @@ export default class Keybinder {
       'accelerator-activated',
       (display, action, deviceId, timestamp) => {
         log(
-          'Accelerator Activated: [display={}, action={}, deviceId={}, timestamp={}]',
+          '[gnome-scratchpad] accelerator activated: [display={}, action={}, deviceId={}, timestamp={}]',
           display, action, deviceId, timestamp
         );
         this._onAccelerator(action);
@@ -19,18 +19,18 @@ export default class Keybinder {
   }
 
   listenFor(keyCombination, callback) {
-    log('Trying to listen for hot key [keyCombination={}]', keyCombination);
+    log('[gnome-scratchpad] trying to listen for hot key [keyCombination={}]', keyCombination);
     let action = global.display.grab_accelerator(keyCombination, 0);
 
     if (action == Meta.KeyBindingAction.NONE) {
-      log('Unable to grab accelerator [keyCombination={}]', keyCombination);
+      log('[gnome-scratchpad] unable to grab accelerator [keyCombination={}]', keyCombination);
     } else {
-      log('Grabbed accelerator [action={}]', action);
+      log('[gnome-scratchpad] grabbed accelerator [action={}]', action);
       let name = Meta.external_binding_name_for_action(action);
-      log('Received binding name for action [name={}, action={}]',
+      log('[gnome-scratchpad] received binding name for action [name={}, action={}]',
         name, action);
 
-      log('Requesting WM to allow binding [name={}]', name);
+      log('[gnome-scratchpad] requesting WM to allow binding [name={}]', name);
       Main.wm.allowKeybinding(name, Shell.ActionMode.ALL);
 
       this.bindings.set(action, {
@@ -55,7 +55,7 @@ export default class Keybinder {
     if (binding) {
       this.bindings.get(action).callback();
     } else {
-      log('No listeners [action={}]', action);
+      log('[gnome-scratchpad] no listeners [action={}]', action);
     }
   }
 }

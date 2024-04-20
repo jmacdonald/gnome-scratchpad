@@ -17,8 +17,8 @@ export default class Window {
 
     // Bail out when it doesn't exist
     if (win === undefined) {
-      log(`Couldn't locate window with wmclass /${wmclass}/ or title /${title}/`);
-      log(`Found these other windows:`);
+      log(`[gnome-scratchpad] couldn't locate window with wmclass /${wmclass}/ or title /${title}/`);
+      log(`[gnome-scratchpad] found these other windows:`);
       Window.logWindows();
 
       return null;
@@ -31,9 +31,9 @@ export default class Window {
   static logWindows() {
     for (const app of Window.appSystem.get_running()) {
       for (const win of app.get_windows()) {
-        log(`=========================`);
-        log(`title: "${win.get_title()}"`);
-        log(`class instance: "${win.get_wm_class_instance()}"`);
+        log(`[gnome-scratchpad] =========================`);
+        log(`[gnome-scratchpad] title: "${win.get_title()}"`);
+        log(`[gnome-scratchpad] wmclass: "${win.get_wm_class_instance()}"`);
       }
     }
   }

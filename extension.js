@@ -5,7 +5,7 @@ import Window from './window.js';
 
 export default class ScratchpadExtension extends Extension {
   enable() {
-    console.warn("enabling scratchpad extension");
+    log("[gnome-scratchpad] enabling extension");
     this.config = new Config().parse();
     this.keyBinder = new KeyBinder();
     this.applyBindings();
@@ -23,7 +23,7 @@ export default class ScratchpadExtension extends Extension {
   }
 
   disable() {
-    console.warn("disabling scratchpad extension");
+    log("[gnome-scratchpad] disabling extension");
     this.keyBinder.clearBindings();
   }
 
