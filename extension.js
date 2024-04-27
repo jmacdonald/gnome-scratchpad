@@ -2,6 +2,7 @@ import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 import Config from './config.js';
 import KeyBinder from './keybinder.js';
 import Window from './window.js';
+import WindowFilter from './window_filter.js';
 
 export default class ScratchpadExtension extends Extension {
   enable() {
@@ -9,6 +10,7 @@ export default class ScratchpadExtension extends Extension {
     this.config = new Config().parse();
     this.keyBinder = new KeyBinder();
     this.applyBindings();
+    this.windowFilter = new WindowFilter(this.config.bindings);
   }
 
   applyBindings() {
@@ -25,6 +27,7 @@ export default class ScratchpadExtension extends Extension {
   disable() {
     log("[gnome-scratchpad] disabling extension");
     this.keyBinder.clearBindings();
+    this.windowFilter.remove();
   }
 
   toggleWindow(binding) {
