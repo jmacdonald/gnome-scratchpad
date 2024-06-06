@@ -4,6 +4,7 @@
   "uuid": "scratchpad@wastedintelligence.com",
   "url": "https://github.com/jmacdonald/gnome-scratchpad",
   "shell-version": [
-    "45"
+    "45",
+    "46"
   ]
 }
