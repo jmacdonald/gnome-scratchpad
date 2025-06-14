@@ -80,6 +80,10 @@ export default class Window {
 
   hide() {
     this.instance.minimize();
+    this.instance.change_workspace_by_index(
+        (global.workspace_manager.get_n_workspaces() - 1),
+      false
+    );
   }
 
   focused() {
