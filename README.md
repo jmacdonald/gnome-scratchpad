@@ -35,7 +35,8 @@ Here's an initial example to get started:
     "bindings": [
       { "wmclass": "^Slack$", "keybind": "<super>i" },
       { "wmclass": "^kitty$", "keybind": "<super>Return" }
-    ]
+    ],
+    "mode": "minimize"
 }
 ```
 
@@ -48,6 +49,7 @@ measure:
     * `wmclass`: regex used to target a window based on its class
     * `title`: regex used to target a window based on its title
     * `keybind`: shortcut in `[<Modifiers>+]<keycode>` notation
+* `mode`: either `minimize` (minimize the window when hiding) or `last_workspace` (move to last workspace when hiding)
 
 > [!NOTE]
 > You only need to specify `wmclass` _or_ `title`. Of the two, `wmclass` is

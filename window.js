@@ -1,9 +1,10 @@
 import Shell from 'gi://Shell';
+import Config from './config.js';
 
 export default class Window {
   static appSystem = Shell.AppSystem.get_default();
 
-  static find({title, wmclass}) {
+  static find({ title, wmclass }) {
     let windows = [];
 
     // Find the Gnome window instance
@@ -39,7 +40,8 @@ export default class Window {
   }
 
   constructor(gnome_window) {
-    this.instance = gnome_window
+    this.instance = gnome_window;
+    this.config = new Config().parse();
   }
 
   arrange(windowWidth, windowHeight) {
@@ -79,7 +81,12 @@ export default class Window {
   }
 
   hide() {
-    this.instance.minimize();
+    if (this.config?.mode == "last_workspace") {
+      const last_workspace_index = global.workspace_manager.get_n_workspaces() - 1;
+      this.instance.change_workspace_by_index(last_workspace_index, false);
+    } else {  // default behavior
+      this.instance.minimize();
+    }
   }
 
   focused() {
