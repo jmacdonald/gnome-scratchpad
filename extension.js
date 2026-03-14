@@ -1,7 +1,8 @@
-import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
-import Config from './config.js';
-import KeyBinder from './keybinder.js';
-import Window from './window.js';
+import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+import Gio from "gi://Gio";
+import Config from "./config.js";
+import KeyBinder from "./keybinder.js";
+import Window from "./window.js";
 
 export default class ScratchpadExtension extends Extension {
   enable() {
@@ -30,7 +31,22 @@ export default class ScratchpadExtension extends Extension {
   toggleWindow(binding) {
     let win = Window.find(binding);
 
-    if (win === null) { return; }
+    if (!win) {
+      if (binding.launch_cmd && !this._launching) {
+        this._launching = true;
+        const cmd = binding.launch_cmd.split(' ');
+        try {
+          Gio.Subprocess.new(cmd, Gio.SubprocessFlags.NONE);
+        } catch (e) {
+          log(
+            `[gnome-scratchpad] failed to launch [cmd=${binding.launch_cmd}]: ${e.message}`)
+        } finally {
+          setTimeout(() => { this._launching = false; }, 1000);
+        }
+      }
+
+      return;
+    }
 
     if (win.focused()) {
       win.hide();
@@ -39,6 +55,7 @@ export default class ScratchpadExtension extends Extension {
       win.show();
     }
   }
+
 
   hideWindows() {
     for (const binding of this.config.bindings) {

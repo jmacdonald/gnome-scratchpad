@@ -34,7 +34,7 @@ Here's an initial example to get started:
     "hide_keybind": "<super>n",
     "bindings": [
       { "wmclass": "^Slack$", "keybind": "<super>i" },
-      { "wmclass": "^kitty$", "keybind": "<super>Return" }
+      { "wmclass": "^kitty$", "keybind": "<super>Return", "launch_cmd": "kitty" }
     ]
 }
 ```
@@ -48,6 +48,7 @@ measure:
     * `wmclass`: regex used to target a window based on its class
     * `title`: regex used to target a window based on its title
     * `keybind`: shortcut in `[<Modifiers>+]<keycode>` notation
+    * `launch_cmd`: optional command to run to launch the program if there are no windows open. can be ommitted.
 
 > [!NOTE]
 > You only need to specify `wmclass` _or_ `title`. Of the two, `wmclass` is
